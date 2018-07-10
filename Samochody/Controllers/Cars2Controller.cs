@@ -6,6 +6,7 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using PagedList;
 using Samochody.Models;
 
 namespace Samochody.Controllers
@@ -14,43 +15,13 @@ namespace Samochody.Controllers
     {
         private CarDBContext db = new CarDBContext();
 
-        // GET: Cars2
-        //[HttpPost]
-        //public ActionResult Index(SzukajAuta Model)
-        //{
-        //    var cars = from i in db.Cars select i;
-
-        //    //jeśli coś przesłano, to wyszukaj po tym
-        //    if (Model != null)
-        //    {
-        //        cars = from i in db.Cars where i.Model.Equals(Model.ModelZnajdz) && i.Brand.Equals(Model.BrandZnajdz) select i;
-        //    }
-
-        //    return View(cars.ToList());
-        //}
-
-        public ActionResult Index(string sortowanie, SzukajAuta Model)
+        public ActionResult Index(string sortowanie, SzukajAuta Model, int? page)
         {
             ViewBag.SortByModel = sortowanie == null ? "Model_Malejaco" : "";
             ViewBag.SortByPrice = sortowanie == "Price_Malejaco" ? "Price_Rosnaco" : "Price_Malejaco";
 
             var cars = from i in db.Cars select i;
-            switch (sortowanie)
-            {
-                case "Model_Malejaco":
-                    cars = cars.OrderByDescending(s => s.Model);
-                    break;
-                case "Price_Malejaco":
-                    cars = cars.OrderByDescending(s => s.Price);
-                    break;
-                case "Price_Rosnaco":
-                    cars = cars.OrderBy(s => s.Price);
-                    break;
-                default:
-                    cars = cars.OrderBy(s => s.Model);
-                    break;
-            }
-
+          
             if (ModelState.IsValid)
             {
                 if (Model.BrandZnajdz != null && Model.ModelZnajdz != null)
@@ -72,8 +43,28 @@ namespace Samochody.Controllers
                            where i.Model.Equals(Model.ModelZnajdz)
                            select i;
                 }
+                ViewBag.BrandZnajdz = Model.BrandZnajdz;
+                ViewBag.ModelZnajdz = Model.ModelZnajdz;
             }
-            return View(cars.ToList());
+            switch (sortowanie)
+            {
+                case "Model_Malejaco":
+                    cars = cars.OrderByDescending(s => s.Model);
+                    break;
+                case "Price_Malejaco":
+                    cars = cars.OrderByDescending(s => s.Price);
+                    break;
+                case "Price_Rosnaco":
+                    cars = cars.OrderBy(s => s.Price);
+                    break;
+                default:
+                    cars = cars.OrderBy(s => s.Model);
+                    break;
+            }
+
+            int pageSize = 2;
+            int pageNumber = (page ?? 1);
+            return View(cars.ToPagedList(pageNumber, pageSize));
         }
 
         // GET: Cars2/Details/5
