@@ -1,0 +1,36 @@
+﻿@model IEnumerable<Samochody.Models.Car>
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+</head>
+<body>
+    @*@using (Html.BeginForm())   NIE DZIALA    
+    {
+        <div>Model: </div>
+        <div>@Html.TextBox("ModelZnajdz")</div>
+        <input type="submit" value="Szukaj" />
+    }*@
+    <form action="/cars2/Index" method="post">
+        <div>Model: </div>
+        <div><input id="ModelZnajdz" name="ModelZnajdz" type="text" value="" /></div>
+        <div><input id="BrandZnajdz" name="BrandZnajdz" type="text" value="" /></div>
+        <input type="submit" value="Szukaj" />
+    </form>
+    <div>
+        <table>
+            <tr><td>Id</td><td>Model</td></tr>
+            @foreach (var wiersz in Model)
+            {
+                <tr><td>@wiersz.Id</td><td>@wiersz.Model</td></tr>
+            }
+        </table>
+    </div>
+</body>
+</html>
