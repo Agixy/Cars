@@ -9,5 +9,6 @@ namespace Samochody.Models
     public class CarDBContext : DbContext
     {
         public DbSet<Car> Cars { get; set; }
+        public DbSet<Service> Services { get; set; }
     }
 }

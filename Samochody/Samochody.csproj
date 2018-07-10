@@ -163,11 +163,26 @@
     <Compile Include="Controllers\Cars2Controller.cs" />
     <Compile Include="Controllers\CarsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\ServicesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201807100918383_InitialCreate.cs" />
+    <Compile Include="Migrations\201807100918383_InitialCreate.Designer.cs">
+      <DependentUpon>201807100918383_InitialCreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201807101200120_NowyModel.cs" />
+    <Compile Include="Migrations\201807101200120_NowyModel.Designer.cs">
+      <DependentUpon>201807101200120_NowyModel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201807101214586_ListaServisow.cs" />
+    <Compile Include="Migrations\201807101214586_ListaServisow.Designer.cs">
+      <DependentUpon>201807101214586_ListaServisow.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Car.cs" />
     <Compile Include="Models\CarDBContext.cs" />
+    <Compile Include="Models\Service.cs" />
     <Compile Include="Models\SzukajAuta.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -196,6 +211,11 @@
     <Content Include="Views\Cars2\Details.cshtml" />
     <Content Include="Views\Cars2\Edit.cshtml" />
     <Content Include="Views\Cars2\Index.cshtml" />
+    <Content Include="Views\Services\Create.cshtml" />
+    <Content Include="Views\Services\Delete.cshtml" />
+    <Content Include="Views\Services\Details.cshtml" />
+    <Content Include="Views\Services\Edit.cshtml" />
+    <Content Include="Views\Services\Index.cshtml" />
     <None Include="_bin_deployableAssemblies\x86\sqlcese40.dll" />
     <None Include="_bin_deployableAssemblies\x86\sqlceqp40.dll" />
     <None Include="_bin_deployableAssemblies\x86\sqlceme40.dll" />
@@ -255,6 +275,17 @@
   <ItemGroup>
     <None Include="packages.config" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201807100918383_InitialCreate.resx">
+      <DependentUpon>201807100918383_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201807101200120_NowyModel.resx">
+      <DependentUpon>201807101200120_NowyModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201807101214586_ListaServisow.resx">
+      <DependentUpon>201807101214586_ListaServisow.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
